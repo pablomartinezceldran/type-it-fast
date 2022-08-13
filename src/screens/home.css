@@ -7,7 +7,7 @@ body {
 .background {
   height: 100vh;
   width: 100vw;
-  background-color: #161214;
+  background-color: #1d0e0a;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -18,19 +18,18 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   font-family: "Times New Roman", Times, serif;
 }
 
 .title {
-  flex: 2;
   font-size: 4rem;
   font-weight: bold;
   color: #fdaf01;
   text-align: center;
   margin-top: 5rem;
-  margin-bottom: 0;
+  margin-bottom: 10%;
 }
 
 .title:hover {
@@ -38,10 +37,8 @@ body {
 }
 
 .buttons {
-  flex: 4;
   display: flex;
   flex-direction: column;
-
   align-items: center;
   width: 100%;
   height: 100%;
@@ -77,15 +74,10 @@ body {
   color: #fdaf01;
 }
 
-.footer {
-  flex: 1;
-}
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 100vh;
   width: 100vw;
   font-family: "Times New Roman", Times, serif;
@@ -95,9 +87,14 @@ body {
   color: #fdaf01;
   font-size: 2rem;
   margin: 0;
+  opacity: 90%;
 }
 
-.rules {
+.backButton:hover {
+  opacity: 100%;
+}
+
+.frame {
   background-color: #0b090a;
   min-width: 768px;
   max-width: 30%;
@@ -108,7 +105,7 @@ body {
 }
 
 @media (max-width: 800px) {
-  .rules {
+  .frame {
     background-color: #0b090a;
     min-width: 90%;
     max-height: 50%;
@@ -118,7 +115,7 @@ body {
   }
 }
 
-.rules::-webkit-scrollbar {
+.frame::-webkit-scrollbar {
   display: none;
 }
 
@@ -128,4 +125,22 @@ body {
   font-weight: bold;
   text-align: justify;
   margin-top: 1rem;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  gap: 1rem;
 }

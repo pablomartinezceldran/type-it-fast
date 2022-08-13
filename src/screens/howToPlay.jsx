@@ -1,18 +1,18 @@
 import "./home.css";
-import background_1 from "../images/background_1.jpg";
+import background from "../images/background_main.jpg";
 import { Link } from "react-router-dom";
-import { Home } from "./home.jsx";
 
 function HowToPlay() {
   return (
-    <div className='background' style={{ backgroundImage: `url(${background_1})` }}>
+    <div className='background' style={{ backgroundImage: `url(${background})` }}>
       <div className='content'>
         <h1 className='title'>How to play</h1>
         <div className='container'>
           <Link to='/' style={{ textDecoration: "none" }}>
             <p className='backButton'>{"<"} Back</p>
           </Link>
-          <div className='rules'>
+          <br />
+          <div className='frame'>
             <p className='text'>
               GOAL
               <br />
