@@ -37,13 +37,33 @@
   justify-content: space-between;
 }
 
-.txt {
+.txt1 {
   font-size: 2.5rem;
   font-weight: 700;
   color: #fdaf01;
   text-align: center;
-  margin-top: 1rem;
-  margin-bottom: 0;
+  margin: 0;
+  text-decoration: none;
+}
+
+.txt1::selection {
+  background: #fdaf01;
+  color: #2d1812;
+}
+
+.stats {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  height: auto;
+}
+
+.txt {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fdaf01;
+  text-align: center;
+  margin: 0;
   text-decoration: none;
 }
 

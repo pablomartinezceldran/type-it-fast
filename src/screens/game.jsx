@@ -3,29 +3,29 @@ import "./game.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-class Queue {
-  constructor() {
-    this.elements = {};
-    this.head = 0;
-    this.tail = 0;
-  }
-  enqueue(element) {
-    this.elements[this.tail] = element;
-    this.tail++;
-  }
-  dequeue() {
-    const item = this.elements[this.head];
-    delete this.elements[this.head];
-    this.head++;
-    return item;
-  }
-  peek() {
-    return this.elements[this.head];
-  }
-  get length() {
-    return this.tail - this.head;
-  }
-}
+// class Queue {
+//   constructor() {
+//     this.elements = {};
+//     this.head = 0;
+//     this.tail = 0;
+//   }
+//   enqueue(element) {
+//     this.elements[this.tail] = element;
+//     this.tail++;
+//   }
+//   dequeue() {
+//     const item = this.elements[this.head];
+//     delete this.elements[this.head];
+//     this.head++;
+//     return item;
+//   }
+//   peek() {
+//     return this.elements[this.head];
+//   }
+//   get length() {
+//     return this.tail - this.head;
+//   }
+// }
 
 var images = {
   q: "🧀​",
@@ -57,60 +57,75 @@ var images = {
 };
 
 function Game() {
-  let queue = new Queue();
-  let mistakes = 0;
-  let lastImage = "";
+  // // let queue = new Queue();
   const [score, setScore] = useState(0);
+  const [mistakes, setMistakes] = useState(0);
+  const [currentImage, setCurrentImage] = useState(null);
+  // const [gameOver, setGameOver] = useState(false);
+  // const [gameStarted, setGameStarted] = useState(false);
 
-  function handleInput(key) {
-    console.log(key);
-    if (queue.peek().value === key) {
-      queue.dequeue().remove();
-      setScore(score + 1);
-    } else mistakes++;
-    console.log(queue);
-    console.log("mistakes: " + mistakes);
-  }
-
-  function startGame() {
-    var board = document.getElementById("board");
-    var newImage = createRandomImage();
-    if (lastImage !== "") {
-      while (newImage === lastImage) {
-        newImage = createRandomImage();
+  const handleInput = (e) => {
+    // if (gameOver) return;
+    console.log("e: ", e);
+    console.log("currentImage: ", currentImage);
+    if (currentImage !== null) {
+      if (e === currentImage.value) {
+        setScore(score + 1);
+        setCurrentImage(null);
+        currentImage.remove();
+        printImage(generateImage());
+      } else {
+        setMistakes(mistakes + 1);
       }
-    } else lastImage = newImage;
-    board.appendChild(newImage);
-  }
+    }
+  };
 
-  function createRandomImage() {
+  document.addEventListener("keydown", function (e) {
+    if (!e.repeat) handleInput(e.key);
+    else console.log("repeated key");
+  });
+
+  const generateImage = () => {
     const keys = Object.keys(images);
     const randomKey = keys[Math.floor(Math.random() * keys.length)];
     let div = document.createElement("div");
     div.textContent = images[randomKey];
-    div.className = "image";
+    div.className = "image  noselect";
     div.value = randomKey;
-    queue.enqueue(div);
+    setCurrentImage(div);
     return div;
-  }
+  };
+
+  const printImage = (image) => {
+    var board = document.getElementById("board");
+    board.appendChild(image);
+  };
+
+  const clearBoard = () => {
+    var board = document.getElementById("board");
+    while (board.firstChild) {
+      board.removeChild(board.firstChild);
+    }
+  };
 
   useEffect(() => {
-    startGame();
-  });
-
-  document.addEventListener("keydown", function (e) {
-    handleInput(e.key);
-  });
+    setScore(0);
+    setMistakes(0);
+    clearBoard();
+    printImage(generateImage());
+  }, []);
 
   return (
     <div className='background'>
       <div className='cont'>
         <div className='header'>
           <Link to='/' style={{ textDecoration: "none" }}>
-            <div className='txt'>Home</div>
+            <div className='txt1'>Home</div>
           </Link>
-
-          <h1 className='txt'>Score: {score}</h1>
+          <div className='stats'>
+            <h1 className='txt'>Score: {score}</h1>
+            <h2 className='txt'>Mistakes: {mistakes}</h2>
+          </div>
         </div>
         <div className='game'>
           <div id='board' className='game-area'></div>
