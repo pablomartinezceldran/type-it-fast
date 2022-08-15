@@ -30,6 +30,9 @@ body {
   text-align: center;
   margin-top: 5rem;
   margin-bottom: 10%;
+  animation: fadeInAnimation ease 1s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .title:hover {
@@ -42,6 +45,18 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .button {
@@ -50,7 +65,7 @@ body {
   border-radius: 50px;
   border: none;
   background-color: #fdaf01;
-  color: #161214;
+  color: #1d0e0a;
   font-size: 2rem;
   font-weight: bold;
   cursor: pointer;
@@ -70,7 +85,7 @@ body {
 
 .b2 {
   margin-bottom: 1rem;
-  background-color: #0b090a;
+  background-color: #1d0e0a;
   color: #fdaf01;
 }
 
@@ -81,6 +96,9 @@ body {
   height: 100vh;
   width: 100vw;
   font-family: "Times New Roman", Times, serif;
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
 }
 
 .backButton {
@@ -95,7 +113,7 @@ body {
 }
 
 .frame {
-  background-color: #0b090a;
+  background-color: #1d0e0a;
   min-width: 768px;
   max-width: 30%;
   max-height: 70%;
@@ -106,7 +124,7 @@ body {
 
 @media (max-width: 800px) {
   .frame {
-    background-color: #0b090a;
+    background-color: #1d0e0a;
     min-width: 90%;
     max-height: 50%;
     padding: 1rem;

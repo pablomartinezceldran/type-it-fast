@@ -1,14 +1,11 @@
 import "./home.css";
 import background from "../images/background_main.jpg";
 import { Link } from "react-router-dom";
+import "../game.js";
 
 function Home() {
   const handleStart = () => {
     console.log("handleStart");
-  };
-
-  const handleHtP = () => {
-    console.log("handleHtP");
   };
 
   const handleScores = () => {
@@ -26,9 +23,7 @@ function Home() {
             </button>
           </Link>
           <Link to='/howToPlay'>
-            <button className='button b2' onClick={handleHtP}>
-              How to play
-            </button>
+            <button className='button b2'>How to play</button>
           </Link>
           <Link to='/scores'>
             <button className='button b2' onClick={handleScores}>
