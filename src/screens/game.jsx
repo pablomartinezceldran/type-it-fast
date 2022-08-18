@@ -1,76 +1,70 @@
 import "./game.css";
-// import { Queue } from "../game.js";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// class Queue {
-//   constructor() {
-//     this.elements = {};
-//     this.head = 0;
-//     this.tail = 0;
-//   }
-//   enqueue(element) {
-//     this.elements[this.tail] = element;
-//     this.tail++;
-//   }
-//   dequeue() {
-//     const item = this.elements[this.head];
-//     delete this.elements[this.head];
-//     this.head++;
-//     return item;
-//   }
-//   peek() {
-//     return this.elements[this.head];
-//   }
-//   get length() {
-//     return this.tail - this.head;
-//   }
-// }
-
 var images = {
-  q: "🧀​",
-  w: "🧇​",
-  e: "​🥗",
-  r: "​🍜​",
-  t: "​🌮​",
-  y: "Y",
-  u: "🍇",
-  i: "I",
-  o: "🦪",
-  p: "​🍕​",
-  a: "​🥑​",
-  s: "​🥣​",
-  d: "​🍩​",
-  f: "🍓",
-  g: "🍪",
-  h: "​🍔",
-  j: "J",
-  k: "🥝",
-  l: "🦞",
-  z: "🥕",
-  x: "X",
-  c: "🎃",
-  v: "🍷",
-  b: "🍆",
-  n: "🍊",
-  m: "🍏",
+  q: "🧀​" /*"q"*/,
+  w: /*"🧇​"*/ "w",
+  e: /*"​🥗"*/ "e",
+  r: /*"​🍜​"*/ "r",
+  t: /*"​🌮​"*/ "t",
+  y: /*"Y"*/ "y",
+  u: /*"🍇"*/ "u",
+  i: /*"I"*/ "i",
+  o: /*"🦪"*/ "o",
+  p: /*"​🍕​"*/ "p",
+  a: /*"​🥑​"*/ "a",
+  s: /*"​🥣​"*/ "s",
+  d: /*"​🍩​"*/ "d",
+  f: /*"🍓"*/ "f",
+  g: /*"🍪"*/ "g",
+  h: /*"​🍔"*/ "h",
+  j: /*"J"*/ "j",
+  k: /*"🥝"*/ "k",
+  l: /*"🦞"*/ "l",
+  z: /*"🥕"*/ "z",
+  x: /*"X"*/ "x",
+  c: /*"🎃"*/ "c",
+  v: /*"🍷"*/ "v",
+  b: /*"🍆"*/ "b",
+  n: /*"🍊"*/ "n",
+  m: /*"🍏"*/ "m",
 };
 
 function Game() {
-  // // let queue = new Queue();
   const [score, setScore] = useState(0);
+  const [count, setCount] = useState(0);
   const [mistakes, setMistakes] = useState(0);
   const [currentImage, setCurrentImage] = useState(null);
-  // const [gameOver, setGameOver] = useState(false);
-  // const [gameStarted, setGameStarted] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  var speed = 10;
+
+  const imagePosition = () => {
+    var board = document.getElementById("board");
+    console.log(board.getBoundingClientRect().x + board.offsetWidth);
+    console.log(currentImage.getBoundingClientRect().x);
+    return (
+      1 -
+      currentImage.getBoundingClientRect().x /
+        (board.getBoundingClientRect().x + board.offsetWidth)
+    );
+  };
+
+  const calculatePoints = () => {
+    return score * (count / 1 - mistakes);
+  };
+
+  const calculateScore = () => {
+    setScore(speed * imagePosition());
+  };
 
   const handleInput = (e) => {
-    // if (gameOver) return;
-    console.log("e: ", e);
-    console.log("currentImage: ", currentImage);
+    if (gameOver) return;
     if (currentImage !== null) {
-      if (e === currentImage.value) {
-        setScore(score + 1);
+      if (e.toLowerCase() === currentImage.value.toLowerCase()) {
+        setCount(count + 1);
+        calculateScore();
+        console.log(calculatePoints());
         setCurrentImage(null);
         currentImage.remove();
         printImage(generateImage());
@@ -79,11 +73,6 @@ function Game() {
       }
     }
   };
-
-  document.addEventListener("keydown", function (e) {
-    if (!e.repeat) handleInput(e.key);
-    else console.log("repeated key");
-  });
 
   const generateImage = () => {
     const keys = Object.keys(images);
@@ -108,11 +97,19 @@ function Game() {
     }
   };
 
+  const moveImage = () => {};
+
+  const generation = () => {
+    printImage(generateImage());
+    moveImage();
+  };
+
   useEffect(() => {
     setScore(0);
     setMistakes(0);
     clearBoard();
-    printImage(generateImage());
+    generation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -123,7 +120,7 @@ function Game() {
             <div className='txt1'>Home</div>
           </Link>
           <div className='stats'>
-            <h1 className='txt'>Score: {score}</h1>
+            <h1 className='txt'>Points: {count}</h1>
             <h2 className='txt'>Mistakes: {mistakes}</h2>
           </div>
         </div>
