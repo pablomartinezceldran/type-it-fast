@@ -3,32 +3,32 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 var images = {
-  q: "🧀​" /*"q"*/,
-  w: /*"🧇​"*/ "w",
-  e: /*"​🥗"*/ "e",
-  r: /*"​🍜​"*/ "r",
-  t: /*"​🌮​"*/ "t",
-  y: /*"Y"*/ "y",
-  u: /*"🍇"*/ "u",
-  i: /*"I"*/ "i",
-  o: /*"🦪"*/ "o",
-  p: /*"​🍕​"*/ "p",
-  a: /*"​🥑​"*/ "a",
-  s: /*"​🥣​"*/ "s",
-  d: /*"​🍩​"*/ "d",
-  f: /*"🍓"*/ "f",
-  g: /*"🍪"*/ "g",
-  h: /*"​🍔"*/ "h",
-  j: /*"J"*/ "j",
-  k: /*"🥝"*/ "k",
-  l: /*"🦞"*/ "l",
-  z: /*"🥕"*/ "z",
-  x: /*"X"*/ "x",
-  c: /*"🎃"*/ "c",
-  v: /*"🍷"*/ "v",
-  b: /*"🍆"*/ "b",
-  n: /*"🍊"*/ "n",
-  m: /*"🍏"*/ "m",
+  q: "🧀​",
+  w: "🧇​",
+  e: "​🥗",
+  r: "​🍜​",
+  t: "​🌮",
+  // y: "Y",
+  u: "🍇",
+  // i: "I",
+  o: "🦪",
+  p: "​🍕​",
+  a: "​🥑​",
+  s: "​🥣​",
+  d: "​🍩​",
+  f: "🍓",
+  g: "🍪",
+  h: "​🍔",
+  // j: "J",
+  k: "🥝",
+  l: "🦞",
+  z: "🥕",
+  // x: "X",
+  c: "🎃",
+  v: "🍷",
+  b: "🍆",
+  n: "🍊",
+  m: "🍏",
 };
 
 function Game() {
@@ -37,25 +37,55 @@ function Game() {
   const [mistakes, setMistakes] = useState(0);
   const [currentImage, setCurrentImage] = useState(null);
   const [gameOver, setGameOver] = useState(false);
+  const [seconds, setSeconds] = useState(60);
   var speed = 10;
+
+  useEffect(() => {
+    if (seconds === 0) {
+      setGameOver(true);
+    }
+  }, [seconds]);
+
+  useEffect(() => {
+    if (gameOver) {
+      setTimeout(() => {
+        window.location.href = "/gameOver";
+        localStorage.setItem("score", Math.trunc(calculatePoints()));
+      }, 1000);
+    }
+  }, [gameOver]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (seconds > 0) {
+        setSeconds(seconds - 1);
+      }
+    }, 1000);
+    return () => clearInterval(id);
+  }, [seconds]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      generation();
+    }, 3000);
+    return () => clearInterval(id);
+  });
+
+  const calculatePoints = () => {
+    return score * (count / 1 - mistakes * 0.7);
+  };
+
+  const calculateScore = () => {
+    setScore(1 + speed * imagePosition());
+  };
 
   const imagePosition = () => {
     var board = document.getElementById("board");
-    console.log(board.getBoundingClientRect().x + board.offsetWidth);
-    console.log(currentImage.getBoundingClientRect().x);
     return (
       1 -
       currentImage.getBoundingClientRect().x /
         (board.getBoundingClientRect().x + board.offsetWidth)
     );
-  };
-
-  const calculatePoints = () => {
-    return score * (count / 1 - mistakes);
-  };
-
-  const calculateScore = () => {
-    setScore(speed * imagePosition());
   };
 
   const handleInput = (e) => {
@@ -66,13 +96,24 @@ function Game() {
         calculateScore();
         console.log(calculatePoints());
         setCurrentImage(null);
+        currentImage.classList.remove("image-animation");
         currentImage.remove();
         printImage(generateImage());
       } else {
+        // no contemplar otras teclas - FALLA
+        // if (keys.includes(e.toLowerCase()))
         setMistakes(mistakes + 1);
       }
     }
   };
+
+  // var teclaPresionada = false;
+  // document.addEventListener("keydown", function (e) {
+  //   if (!teclaPresionada) {
+  //     handleInput(e.key);
+  //     teclaPresionada = true;
+  //   }
+  // });
 
   const generateImage = () => {
     const keys = Object.keys(images);
@@ -97,7 +138,9 @@ function Game() {
     }
   };
 
-  const moveImage = () => {};
+  const moveImage = () => {
+    //falta hacer que se mueva
+  };
 
   const generation = () => {
     printImage(generateImage());
@@ -119,6 +162,7 @@ function Game() {
           <Link to='/' style={{ textDecoration: "none" }}>
             <div className='txt1'>Home</div>
           </Link>
+          <div className='timer txt1'>{seconds}</div>
           <div className='stats'>
             <h1 className='txt'>Points: {count}</h1>
             <h2 className='txt'>Mistakes: {mistakes}</h2>

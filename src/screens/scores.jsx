@@ -13,7 +13,7 @@ function Scores() {
           </Link>
           <br />
           <div className='frame'>
-            <div className='scores'>dsaasd</div>
+            <div className='scores'>Last score: {localStorage.getItem("score")}</div>
           </div>
         </div>
       </div>

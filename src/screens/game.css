@@ -84,14 +84,16 @@
   border-left: #fdaf01 solid 2px;
   border-right: #fdaf01 solid 2px;
   margin-bottom: 1rem;
+  position: relative;
 }
 
 .game-area {
   width: 100%;
   height: 100%;
   display: flex;
-
-  align-items: center;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
 }
 
 .image {
@@ -105,6 +107,7 @@
   font-size: 1.5rem;
   margin: 0.5rem;
   background-color: #e5e5e5;
+  position: relative;
 }
 
 .gradient {

@@ -19,7 +19,8 @@ function GameOver() {
     <div className='background' style={{ backgroundImage: `url(${background})` }}>
       <div className='content'>
         <h1 className='title'>Game Over</h1>
-        <div className='buttons horizontal'>
+        <h2 className='txt1 margin-bottom'>Score: {localStorage.getItem("score")}</h2>
+        <div className='buttons'>
           <Link to='/play'>
             <button className='button b1' onClick={handleStart}>
               Try again
