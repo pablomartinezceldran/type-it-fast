@@ -22,6 +22,8 @@ Another important problem has been reading inputs from the keyboard. Too many pr
 There are things that I have left out. One of them is to save the scores in a database and to be able to log in.
 I would also like to add an option to share the web app with friends and be able to challenge each other.
 
+I originally wanted to process the images in a queue and check that the key pressed was the front of the queue. Then I changed it to only process a single image using a hook.
+
 ## Things I am proud of
 
 Personally I think the look and feel has turned out very well.
