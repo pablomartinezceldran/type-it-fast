@@ -1,70 +1,35 @@
-# Getting Started with Create React App
+# Type it Fast
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The game goal is to score points by typing the right
+first letter of the emoji appearing on the screen.
 
-## Available Scripts
+The player has 60 seconds to score as many points as possible.
 
-In the project directory, you can run:
+## Documentation
 
-### `npm start`
+This web app has been programmed in **React**. It consists of a main menu, where you can start the game, see the game instructions and personal scores.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+In the game screen there is a header with a countdown timer, the current score and the errors. For these I have used React hooks. There is also the board where the images appear, a gradient and a keyboard.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+At the end of the countdown timer, the game over screen will be shown, with the option to restart a game or go to the main menu.
 
-### `npm test`
+## Problems and future improvements
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The main problem I have had is moving the images around the board. I have tried CSS animations and other alternatives but either it only ran once or it didn't move at all.
 
-### `npm run build`
+Another important problem has been reading inputs from the keyboard. Too many pressed keys were read at once. In order to partially solve it, I have developed a virtual keyboard on screen that also allows its use in mobile devices.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+There are things that I have left out. One of them is to save the scores in a database and to be able to log in.
+I would also like to add an option to share the web app with friends and be able to challenge each other.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Things I am proud of
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Personally I think the look and feel has turned out very well.
 
-### `npm run eject`
+I have tried to make the web app as responsive as possible, so it can be used on mobile devices.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+With this project I have been able to expand my knowledge of React, such as the use of hooks and functions like useEffect, setTimeout and others.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Author
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- [@pablomartinezceldran](https://www.github.com/pablomartinezceldran)
